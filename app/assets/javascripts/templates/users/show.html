@@ -1,0 +1,25 @@
+
+<table>
+<tr>
+<td>
+name : {{userDetail.first_name | capitalize }} {{userDetail.last_name | capitalize}}
+</tr>
+<td>employee Id : {{userDetail.employee_id}}</td>
+<td> Role : {{userDetail.role.name}}</td>
+<td>technologies
+ <div ng-repeat="skill in userDetail.technologies">
+ <span>{{skill.name}}</span>
+ </div>
+</td>
+<td>team 
+<div ng-repeat="team in userDetail.teams">
+ <span>{{team.name}}</span>
+ </div>
+ </td>
+<td></td>
+
+</table>
+<pre>
+<!-- {{userDetail | json}} -->
+</pre>
+

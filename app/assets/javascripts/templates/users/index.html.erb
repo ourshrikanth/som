@@ -1,0 +1,106 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Users</h2>
+    </div>
+</div>
+<!-- <p><strong>Sorting:</strong> {{usersTableParams.sorting()|json}}</p>
+ <p><strong>Filter:</strong> {{usersTableParams.filter()|json}}</p>
+ --> 
+  <!-- <button ng-click="usersTableParams.sorting('users.id: desc')" class="btn btn-default pull-right">Clear sorting</button> -->
+  <div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-16">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                      <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="control-label" for="First_Name">First Name</label>
+                            <input type="text"  class="form-control" name="first_name" ng-model="usersTableParams.filter()['first_name']">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="Last_Name">Last Name</label>
+                            <input type="text"  class="form-control" name="last_name" ng-model="usersTableParams.filter()['last_name']">
+                        </div>
+                          <div class="form-group">
+                            <label class="control-label" for="EmployeeID">Employee ID</label>
+                            <input type="text"  class="form-control" name="employee_id" ng-model="usersTableParams.filter()['employee_id']">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="EmployeeID">Email</label>
+                            <input type="text"  class="form-control" name="email" ng-model="usersTableParams.filter()['email']">
+                        </div>
+                           <div class="form-group">
+                            <label class="control-label" for="roles">Role</label>
+                            <select class="form-control" name="role_name" ng-model="usersTableParams.filter()['roles.id']">
+                                <option value="">--</option>
+                                <option ng-repeat="role in roles" value="{{role.id}}">{{role.name |capitalize}}</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label" for="Teams">Teams</label>
+                            <select chosen class="form-control" name="teams.id" ng-model="usersTableParams.filter()['teams.id']" ng-options="team.id as team.name for  team in all_teams" >
+                             <option value="">Select Team</option>
+                            </select>
+
+                        </div>
+                         <div class="form-group">
+                            <label class="control-label" for="Technologies">Technologies</label>
+                            <select chosen style="width: 200px" data-placeholder="Select Technologies" multiple class="form-control" id="tech_id" name="technologies.id" ng-model="usersTableParams.filter()['technologies.id']"  ng-options="technology.id as technology.name for  technology in technology_list">
+                                <option value="">Select Technologies</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="weekno">Status</label>
+                            <select class="form-control" name="status" ng-model="usersTableParams.filter()['users.status']">
+                                <option value="">--</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div>
+                     <div class="ibox-content">
+
+  <a ng-href="#/users/add" class="btn btn-primary pull-left">Add Users</a>
+<table ng-table="usersTableParams" class="table table-striped table-bordered">
+            <tr ng-repeat="user in users">
+                <td data-title="'First Name'" sortable="'first_name'">
+                    {{user.first_name}}
+                </td>
+                <td data-title="'Last Name'" sortable="'last_name'" >
+                   {{user.last_name}}
+                </td>
+                  <td data-title="'Employee Id'" sortable="'employee_id'">
+                   {{user.employee_id}}
+                </td>
+                  <td data-title="'Email'" sortable="'email'">
+                   {{user.email}}
+                </td>
+                  <td data-title="'Role'" sortable="'role_name'" >
+                   {{user.role_name | capitalize}}
+                </td>
+                <td data-title="'Teams'" sortable="'team_name'">
+                   {{user.team_name}}
+                </td>
+                 <td data-title="'Technologies'" sortable="'technology_name'">
+                   {{user.technology_name}}
+                </td>
+                  <td data-title="'Status'" sortable="'status'">
+                   {{user.status | uppercase}}
+                </td>
+                 <td data-title="'Actions'">
+
+ <div class="bs-example" data-example-id="btn-variants">
+                        <a ng-href="#/users/{{user.id}}/edit" class="btn btn-sm btn-primary"><i class="fa fa-pencil-square-o"></i></a>
+                        <button class="btn btn-danger" confirmed-click="deactivateUser(user)" ng-confirm-click="Are you Sure?"> <i class="fa fa-trash-o"></i></button>
+  
+    
+  </div>
+                      </td>
+            </tr>
+        </table>  
+ </div>
+            </div>
+        </div>
+    </div>
+</div>

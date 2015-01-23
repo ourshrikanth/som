@@ -1,0 +1,17 @@
+<div>
+			<form name="editTeamForm" ng-submit="editTeamForm.$valid && updateTeam(teamData)" novalidate>
+				<h3>Edit Team</h3>
+			  	<div class="form-group">
+			        <input type="text"  class="form-control" ng-class="{error: (editTeamForm.$submitted && editTeamForm.name.$error.required) || (editTeamForm.name.$error.unique && editTeamForm.name.$dirty && !editTeamForm.name.$error.required)}"placeholder="Name" name="name" ng-model="teamData.name" model="Team" is-checked=false object-id={{teamData.id}} unique-field required>
+				    <div class="error" 
+				      ng-show="editTeamForm.$submitted && editTeamForm.name.$error.required">
+				    	Enter Team	
+				    </div>
+				    <div class="error" ng-show="editTeamForm.name.$error.unique && editTeamForm.name.$dirty && !editTeamForm.name.$error.required ">
+          				Team already exist
+    				</div>
+
+			    </div>
+			    <button type="submit" class="btn btn-primary">Update</button>
+			</form>
+	</div>

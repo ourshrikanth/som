@@ -1,0 +1,71 @@
+<!-- <p><strong>Sorting:</strong> {{tableParams.sorting()|json}}
+    <p><strong>Filter:</strong> {{tableParams.filter()|json}}
+        <button ng-click="usersTableParams.sorting('planning_sheets.id: desc')" class="btn btn-default">Clear sorting</button>
+        <p><strong>Page:</strong> {{tableParams.page()}}
+            <p><strong>Count per page:</strong> {{tableParams.count()}}
+ -->
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Review Planning Sheet</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-14">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+
+
+                    <form class="form-inline" role="form">
+                        <div class="form-group planForms">
+                            <label class="control-label" for="year">Year</label>
+                            <select class="form-control" name="year" id="year" custom-years ng-model="tableParams.filter()['year']">
+                                <option value="">select year</option>
+                                <option ng-repeat="year in years" ng-selected="currentYear=={{year}}" value="{{year}}">{{year}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group planForms">
+                            <label class="control-label" for="weekno">Week</label>
+                            <select class="form-control" name="weekno" id="weekno" ng-model="tableParams.filter()['week_no']">
+                                <option value="">select week</option>
+                                <option ng-repeat="week in weeks" ng-selected="currentWeek=={{week.id}}" value="{{week.id}}">{{week.value}}</option>
+                            </select>
+                        </div>
+                    </form>
+<button ng-click="tableParams.sorting('planning_sheets.id: desc')" class="btn btn-info btn-xs pull-right">Clear sorting</button>
+                    <table ng-table="tableParams" class="table ng-table-responsive table-striped table-bordered" fixed-table-headers="scrollable-area" show-filter="true">
+                        <tr ng-repeat="userplans in data">
+                            <!--  <td data-title="'Id'">
+                                {{userplans.id}}
+                            </td> -->
+                            <td data-title="'Employee Name'" sortable="'first_name'" filter="{ 'first_name': 'text' }">
+                                {{userplans.first_name | capitalize}} {{userplans.last_name | capitalize}}
+                            </td>
+                            <td data-title="'Week No'" sortable="'week_no'">
+                                {{userplans.week_no}} ( {{userplans.from_date | date: 'dd-MM-yy'}} to {{userplans.to_date | date: 'dd-MM-yy'}} )
+                            </td>
+
+                            <td data-title="'Total Hours'" sortable="'total_hours'">
+                                {{userplans.total_hours}}
+                            </td>
+                            <td data-title="'Planned Hours'" sortable="'planned_hours'">
+                                {{userplans.planned_hours}}
+                            </td>
+                            <td data-title="'Utilization %'">
+                                {{userplans.planned_hours * 100 / userplans.total_hours | number : 2}} %
+                            </td>
+                            <td data-title="'Status'" sortable="'status'" class="sanjay" filter="{ 'planning_sheets.status': 'select' }" filter-data="getStatus($column)">
+                                <span class="label label-info">{{userplans.status | capitalize }}</span>
+                            </td>
+                            <td data-title="'Actions'">
+                                <a href="#/userplansheet/{{userplans.id}}" class="btn btn-sm btn-primary">  Show </a>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

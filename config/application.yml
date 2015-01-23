@@ -1,0 +1,13 @@
+defaults: &defaults
+  base_url: "http://localhost:3000"
+  developer_mails: []
+development:
+  <<: *defaults
+  base_url: "http://som.softwaydev.com"
+  developer_mails: ['shrikanth.hathwar@softwaysolutions.com','bijaya.das@softwaysolutions.com','sanjay.kumar@softwaysolutions.com']
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

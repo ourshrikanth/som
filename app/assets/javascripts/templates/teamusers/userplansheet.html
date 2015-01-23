@@ -1,0 +1,73 @@
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Review Planning Sheet</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-14">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+   <table class="table table-striped table-bordered">
+   <tr>
+       <th>Employee Name</th>
+       <th>Week No</th>
+       <th>Total Hours</th>
+       <th>Planned Hours</th>
+       <th>Billable Hours</th>
+       <th>Utilization %</th>
+       <th>Status</th>
+       <th>Actions</th>
+
+   </tr>
+            <tr ng-repeat="userplans in planning_sheet.sheet" >
+                <td>
+                        {{userplans.first_name  | capitalize}} {{userplans.last_name  | capitalize}}
+                    </td>
+                    <td >
+                         {{userplans.week_no}} ( {{userplans.from_date | date: 'dd-MM-y'}} to {{userplans.to_date | date: 'dd-MM-y'}} )
+                    </td>
+                    <td>
+                        {{userplans.total_hours}}
+                    </td>
+                    <td>
+                        {{userplans.planned_hours}}
+                    </td>
+                    <td>
+                        {{userplans.billable_hours}}
+                    </td>
+                    <td>
+                        {{userplans.planned_hours * 100 / userplans.total_hours | number : 2}} %
+                    </td>
+                    <td>
+                       <span class="label label-info">{{userplans.status | capitalize }}</span>
+                    </td>
+                     <td>
+                        <a ng-if="userplans.status == 'submitted'" class="btn btn-success btn-sm" ng-click="clickToUpdate('approve')">Approve</a>
+                        <a ng-if="userplans.status == 'submitted'" ng-click="clickToUpdate('reject')" class="btn btn-sm btn-danger">Reject</a>
+
+                    </td>
+            </tr>
+    </table>
+       <!-- <p><strong>Sorting:</strong> {{tableParams.sorting()|json}} -->
+            <button ng-click="tableParams.sorting('planned_tasks.id: desc')" class="btn btn-info btn-xs pull-right">Clear sorting</button>
+            <!-- <p><strong>Page:</strong> {{tableParams.page()}}
+                <p><strong>Count per page:</strong> {{tableParams.count()}} -->
+            <table ng-table="tableParams" class="table ng-table-responsive table-bordered" fixed-table-headers="scrollable-area">
+                <tr ng-repeat="task in planning_sheet.tasks">
+
+                    <td data-title="'Task Title'"  sortable="'title'">
+                        {{task.title}}
+                    </td>
+                    <td data-title="'Work Hours'"  sortable="'work_hours'">
+                        {{task.work_hours}}
+                    </td>
+                    <td data-title="'Billable Hours'"  sortable="'billable_hours'">
+                        {{task.billable_hours}}
+                    </td>
+                </tr>
+            </table>
+
+

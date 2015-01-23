@@ -1,0 +1,45 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Departments</h2>
+    </div>
+</div>
+<form class="form-inline" name="departmentForm" role="form" novalidate ng-submit="departmentForm.$valid && addDepartment()" >
+<h4>Add a new Department</h4>
+<div class="form-group planForms">
+     <!-- "name" should be same as that odf the column in the depatment table  -->
+    <input type="text"  class="form-control" ng-class="{error: departmentForm.name.$invalid && departmentForm.$submitted }" placeholder="Name" name="name" ng-model="name" model="Department" is-checked="true" unique-field required>
+    <div class="error" ng-show=" departmentForm.name.$error.required && departmentForm.$submitted ">
+        Please enter Department Name
+    </div>
+    <div class="error " ng-show=" !departmentForm.name.$error.required && departmentForm.name.$dirty && departmentForm.name.$error.unique">
+        Department Name already in use
+    </div>
+</div>
+<div class="form-group planForms">
+<button type="submit" class="btn btn-sm btn-success">Add</button>
+</div>
+</form>
+
+
+
+<div class="col-lg-8">
+  <table class="table table-striped table-bordered">
+  <tr><th>Name </th><th>Status </th><th>Action</th></tr>
+    <tr ng-repeat="department in departments | orderBy:'-id'">
+    <td >
+      <a href="#" editable-text="department.name" e-name="name" e-required onbeforesave="updateDepartment(department,$data)">{{department.name|| "empty" }}<i class="fa fa-pencil fa-fw"></i></a> 
+    </td>
+    <td>{{department.status | capitalize}}</td>
+    <td>
+        <a ng-href="#/departments/{{department.id}}" class="btn btn-sm btn-primary" >View Teams</a>
+    <!--     <a ng-href="#/departments/{{department.id}}/edit" class=" btn btn-sm btn-primary">
+            <i class="fa fa-pencil-square-o"></i> Edit
+        </a> -->
+        <button ng-show="department.status == 'active'" class="btn btn-sm btn-danger" confirmed-click="deleteDept(department)" ng-confirm-click="Are you Sure?">
+            <i class="fa fa-trash-o"></i> Deactivate
+        </button>
+    </td>
+    </tr>
+  </table>
+</div
+>

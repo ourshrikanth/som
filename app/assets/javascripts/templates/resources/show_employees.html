@@ -1,0 +1,5 @@
+<tr ng-repeat="req in resource.requested_resources">
+<td>Employee:</td><td>{{req.user.first_name | capitalize}} {{req.user.last_name | capitalize}} </td>
+<td>Date:</td><td>{{req.start_date | date:'MM-dd-yyyy'}} to {{req.end_date | date:'MM-dd-yyyy'}}</td>
+<td>Hours:</td><td>{{req.hours}}</td>
+</tr>

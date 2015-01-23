@@ -1,0 +1,65 @@
+<form name="planningsheetForm" class="form-inline" role="form" ng-submit="planningsheetForm.$valid && addRow(add)" novalidate>
+    <input type="hidden" name="id" value="{{add.id}}">
+    <div class="form-group planForms">
+        <label class="control-label" for="year">Title</label>
+        <input type="text" name="title" class="form-control" ng-model="add.title" required>
+        <div class="error" ng-show="planningsheetForm.title.$error.required  && planningsheetForm.$submitted">
+            enter a title
+        </div>
+    </div>
+
+    <div class="form-group planForms">
+        <label class="control-label" for="year">Work Hours</label>
+        <input type="number" name="work_hours" class="form-control" ng-model="add.work_hours" min="0" required>
+        <div class="error" ng-show="planningsheetForm.work_hours.$error.required  && planningsheetForm.$submitted">
+            enter a work hours
+        </div>
+    </div>
+
+    <div class="form-group planForms">
+        <label class="control-label" for="year">Billable Hours</label>
+        <input type="number" name="billable_hours" class="form-control" ng-model="add.billable_hours" min="0" required lower-than="{{add.work_hours}}">
+        <div class="error" ng-show="planningsheetForm.billable_hours.$error.lowerThan && planningsheetForm.$submitted && !planningsheetForm.billable_hours.$error.required">
+            Billable hours cannot be greater than work hours
+        </div>
+        <div class="error" ng-show="planningsheetForm.$submitted && planningsheetForm.billable_hours.$error.required">
+            enter a valid billable hours
+        </div>
+    </div>
+<div class="form-group planForms">
+    <input type="submit" class="btn btn-sm btn-success" value=" Add Task ">
+</div>
+    <!-- <tr>
+            <td rowspan="2">{{add.id}}
+               
+            </td>
+            <td>Title:</td>
+            <td>
+                <input type="text" name="title" class="w100" ng-model="add.title" required>
+                <div class="error" ng-show="planningsheetForm.title.$error.required  && planningsheetForm.$submitted">
+                    enter a title!
+                </div>
+            </td>
+            <td>work_hours: </td>
+            <td>
+                <input type="number" name="work_hours" class="w180" ng-model="add.work_hours" min="0" required>
+                <div class="error" ng-show="(planningsheetForm.work_hours.$error.required && planningsheetForm.$submitted)">
+                    enter a work_hours!
+                </div>
+            </td>
+            <td>billable_hours: </td>
+            <td>
+                <input type="number" name="billable_hours" class="w180" ng-model="add.billable_hours" min="0" required lower-than="{{add.work_hours}}">
+                <div class="error" ng-show="planningsheetForm.billable_hours.$error.lowerThan && planningsheetForm.$submitted && !planningsheetForm.billable_hours.$error.required">
+                    Billing hours cannot be greater than work hours
+                </div>
+                <div class="error" ng-show="planningsheetForm.$submitted && planningsheetForm.billable_hours.$error.required">
+                    enter a valid billable_hours!
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value=" Add Task ">
+            </td>
+        </tr> -->

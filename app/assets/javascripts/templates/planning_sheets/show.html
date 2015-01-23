@@ -1,0 +1,68 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>View Planning Sheet</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-16">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Week No</th>
+                            <th>Total Hours</th>
+                            <th>Planned Hours</th>
+                            <th>Billable Hours</th>
+                            <th>Utilization %</th>
+                            <th>Status</th>
+
+                        </tr>
+                        <tr ng-repeat="sheet in data.sheet">
+                            <td>
+                                {{sheet.week_no}} ( {{sheet.from_date | date: 'dd-MM-yy'}} to {{sheet.to_date | date: 'dd-MM-yy'}} )
+                            </td>
+                            <td>
+                                {{sheet.total_hours}}
+                            </td>
+                            <td>
+                                {{sheet.planned_hours}}
+                            </td>
+                            <td>
+                                {{sheet.billable_hours}}
+                            </td>
+                            <td>
+                                {{sheet.planned_hours * 100 / sheet.total_hours | number : 2}} %
+                            </td>
+                            <td>
+                                <span class="label label-info">{{sheet.status | capitalize }}</span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- <p><strong>Sorting:</strong> {{tableParams.sorting()|json}} -->
+                    <button ng-click="tableParams.sorting('planned_tasks.id: desc')" class="btn btn-info btn-xs pull-right">Clear sorting</button>
+                   <!--  <p><strong>Page:</strong> {{tableParams.page()}}
+                        <p><strong>Count per page:</strong> {{tableParams.count()}}
+                            <p><strong>Total:</strong> {{tableParams.total()}} -->
+
+                                <table ng-table="tableParams" class="table ng-table-responsive table-striped table-bordered">
+                                    <tr ng-repeat="data in $data.tasks">
+                                        <td data-title="'Title'" sortable="'title'">
+                                            {{data.title}}
+                                        </td>
+                                        <td data-title="'Work Hours'" sortable="'work_hours'">
+                                            {{data.work_hours}}
+                                        </td>
+                                        <td data-title="'Billable Hours'" sortable="'billable_hours'">
+                                            {{data.billable_hours}}
+                                        </td>
+
+
+                                    </tr>
+                                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

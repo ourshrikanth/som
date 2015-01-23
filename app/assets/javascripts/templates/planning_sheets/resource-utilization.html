@@ -1,0 +1,80 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Resource Utilisation</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-16">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+                    <form class="form-inline"  role="form">
+                        <div class="form-group planForms">
+                            <label class=" control-label" for="teams">Team</label>
+                            <select chosen class="form-control" name="teams" id="teams" ng-model="tableParams.filter()['team_id']" ng-options="obj.id as obj.name for obj in filter_form.options">
+                                <option value="">Select Team</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group planForms">
+                            <label class="control-label" for="year">Year</label>
+                            <select class="form-control" name="year" id="year" custom-years ng-model="tableParams.filter()['year']">
+                                <option value="">Select Year</option>
+                                <option ng-repeat="year in years" ng-selected="currentYear=={{year}}" value="{{year}}">{{year}}</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group planForms">
+                            <label class="control-label" for="weekno">Week</label>
+                            <select class="form-control" name="weekno" id="weekno" ng-model="tableParams.filter()['week_no']">
+                                <option value="">Select Week</option>
+                                <option ng-repeat="week in weeks" ng-selected="currentWeek=={{week.id}}" value="{{week.id}}">{{week.value}}</option>
+                            </select>
+                        </div>
+
+                    </form>
+
+
+
+
+
+                    <!--     <p><strong>Sorting:</strong> {{tableParams.sorting()|json}} </p>
+        <p><strong>Filter:</strong> {{tableParams.filter()|json}} </p> -->
+                    <button ng-click="tableParams.sorting('planning_sheets.id: desc')" class="btn btn-info btn-xs pull-right">Clear sorting</button>
+                    <!--        <p><strong>Page:</strong> {{tableParams.page()}} </p>
+                <p><strong>Count per page:</strong> {{tableParams.count()}} </p> -->
+
+                    <table ng-table="tableParams" class="table ng-table-responsive table-striped table-bordered" fixed-table-headers="scrollable-area" show-filter="true">
+                        <tr ng-repeat="data in $data | filter:getFullName">
+
+                            <td data-title="'Employee Name'" sortable="'first_name'" filter="{ 'first_name': 'text' }">
+                                {{ data.fullName }}
+                            </td>
+                            <td data-title="'Week No'" sortable="'week_no'">
+                                {{data.week_no}} ( {{data.from_date | date: 'dd-MM-yy'}} to {{data.to_date | date: 'dd-MM-yy'}} )
+                            </td>
+                            <td data-title="'Total Hours'" sortable="'total_hours'">
+                                {{data.total_hours}}
+                            </td>
+                            <td data-title="'Planned Hours'" sortable="'planned_hours'">
+                                {{data.planned_hours}}
+                            </td>
+                            <td data-title="'Utilization %'">
+                                {{data.planned_hours * 100 / data.total_hours | number : 2}} %
+                            </td>
+                            <td data-title="'Status'" sortable="'status'" filter="{ 'planning_sheets.status': 'select' }" filter-data="getStatus($column)">
+                                <span class="label label-info">{{data.status | capitalize }}</span>
+                            </td>
+                            <td data-title="'Actions'">
+                                <a ng-href="#/userplansheet/{{data.id}}" class="btn btn-sm btn-primary">Show</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

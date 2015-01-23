@@ -1,0 +1,26 @@
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Teams</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <table ng-table="tableParams" class="table ng-table-responsive table-striped table-bordered">
+                        <tr ng-repeat="team in data">
+                            <td data-title="'Team Name'">
+                                {{team.team.name | capitalize}}
+                            </td>
+                            <td data-title="'Action'">
+                                <button  class="btn btn-sm btn-primary" ng-click="show_sheets(team.team.id)">Review</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

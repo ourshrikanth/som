@@ -1,0 +1,15 @@
+<div>
+	<form name="editDepartmentForm" ng-submit="editDepartmentForm.$valid && updateDepartment(department)" novalidate>
+		<h3>Edit Department</h3>
+	  	<div class="form-group">
+	        <input type="text"  class="form-control"  ng-class="{error: (editDepartmentForm.$submitted && editDepartmentForm.name.$error.required) || (editDepartmentForm.name.$error.unique && editDepartmentForm.name.$dirty && !editDepartmentForm.name.$error.required)}"  placeholder="Name" name="name" ng-model="department.name"  model="Department" is-checked=true object-id={{department.id}} unique-field required>
+		    <div class="error" ng-show="editDepartmentForm.$submitted && editDepartmentForm.name.$error.required">
+		    	Enter Department	
+		    </div>
+		    <div class="error" ng-show="editDepartmentForm.name.$error.unique && editDepartmentForm.name.$dirty && !editDepartmentForm.name.$error.required ">
+		    	Department already exist
+		    </div>
+	    </div>
+	    <button type="submit" class="btn btn-primary">Update</button>
+	</form>
+</div>

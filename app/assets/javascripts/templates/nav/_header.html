@@ -1,0 +1,42 @@
+<div class="row border-bottom" ng-controller="NavCtrl" >
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "><i class="fa fa-bars"></i> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <span class="m-r-sm text-muted welcome-message">Welcome {{ user.first_name }} {{ user.last_name }} to Softway Weekly Planner</span>
+            </li>
+            <li><a ng-show="signedIn()" href="#/dashboard">Dashboard</a>
+            </li>
+
+            <li ng-show="signedIn()">
+                <a href="#/editMyProfile">My Profile</a>
+            </li>
+            <li>
+                <a ng-click="logOut()">
+                    <i class="fa fa-sign-out" ng-show="signedIn()"></i> Log out
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
+<!--  <div class="row border-bottom">
+                <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>            
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">Welcome to Softway Weekly Planner</span>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div> -->

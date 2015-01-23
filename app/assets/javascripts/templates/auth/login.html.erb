@@ -1,0 +1,42 @@
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    
+        <div class="margin-top"><%= image_tag("patterns/swp-logo.png", size: "118x102", alt: "sss")%>
+        </div>
+        <h3>Welcome to Softway Weekly Planner</h3>
+        <p>Please Login with your Email and Password.</p>
+        <div>
+            <div ng-repeat="error in errors" class = "alert-danger"> {{error}} </div>
+        </div>
+       
+        <form  name="loginForm" class="m-t" method="post" novalidate ng-submit="loginForm.$valid && login()">
+            <div class="form-group">
+                <input type="email" ng-model="user.email" name="userEmail"  required valid-email class="form-control" placeholder="Email" ng-init="user.email='somadmin@yopmail.com'">
+                <span class="error" ng-show="(loginForm.$submitted && loginForm.userEmail.$error.required) || 
+                  (loginForm.userEmail.$touched && loginForm.userEmail.$invalid)">
+                    Please enter email
+                </span>    
+            </div>
+            
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" name="userPasssword" required  ng-minlength=8 ng-model="user.password"  ng-init="user.password='11111111'">
+                <span class="error" ng-show="(loginForm.$submitted && loginForm.userPasssword.$error.required) || (loginForm.userPasssword.$touched && loginForm.userPasssword.$error.required)">
+                    Please enter password
+                </span>
+                <span class="error" ng-show="loginForm.userPasssword.$touched && 
+                  loginForm.userPasssword.$error.minlength ">
+                    Password must be atleast eight characters
+                 </span>    
+            </div>
+  <button type="submit" class="btn btn-primary block full-width m-b">Login</button
+
+        </form>
+        <a href ng-click="forgot_password_link()">
+            <small>Forgot password?</small>
+        </a> 
+        <p class="m-t">
+            <small>&copy; Softway Solutions 2015</small>
+        </p>
+    </div>
+
+ 

@@ -1,0 +1,94 @@
+<form name="editplanningsheetForm" class="form-inline" role="form" ng-submit="editplanningsheetForm.$valid && saveEdit(p)" novalidate>
+<input type="hidden" name="id" value="{{p.id}}">
+
+ <div class="form-group planForms">
+        <label class="control-label" for="year">Title</label>
+        <input type="text" name="title" ng-model="edit.title" class="form-control" value="{{p.title}}" required>
+                <div class="error" ng-show="editplanningsheetForm.$submitted && editplanningsheetForm.title.$invalid">
+                    title required
+                </div>
+    </div>
+    <div class="form-group planForms">
+        <label class="control-label" for="year">Work Hours</label>
+        <input type="text" name="work_hours"  class="form-control" ng-model="edit.work_hours" class="w180" value="{{p.work_hours}}" 
+                  required>
+               <div class="error" ng-show="editplanningsheetForm.$submitted && 
+                  editplanningsheetForm.work_hours.$error.required">
+                    work hours is required
+                </div>
+    </div>
+    <div class="form-group planForms">
+        <label class="control-label" for="year">Billable Hours</label>
+       <input type="text" name="billable_hours" ng-model="edit.billable_hours" class="w180" 
+                  value="{{p.billable_hours}}" required lower-than="{{edit.work_hours}}">
+                <div class="error" ng-show="editplanningsheetForm.$submitted && 
+                   editplanningsheetForm.billable_hours.$error.required">
+                    Billable hours is required
+                </div>
+               <div class="error" ng-show="editplanningsheetForm.billable_hours.$error.lowerThan && editplanningsheetForm.$submitted && !editplanningsheetForm.billable_hours.$error.required">
+                Billable hours cannot be greater than work hours
+            </div>
+    </div>
+
+    <div class="form-group planForms">
+     <button type="submit" class="btn btn-sm btn-success">Update</button>
+          <button type="submit" class="btn btn-sm btn-danger"  ng-click="cancelEdit()">Cancel</button>
+
+    <!-- <input type="submit" class="btn btn-sm btn-success" value="Update">
+      <input type="button" class="btn btn-sm btn-success"  value="Cancel" ng-click="cancelEdit()"> -->
+</div>
+</form>
+
+
+<!-- <form name="editplanningsheetForm" ng-submit="editplanningsheetForm.$valid && saveEdit(p)" novalidate>
+    <table class="noborder">
+        <tr>
+            <td rowspan="2">
+                <input type="hidden" name="id" value="{{p.id}}">
+            </td>
+            <td>Title:</td>
+            <td>
+                <input type="text" name="title" ng-model="edit.title" class="w100" value="{{p.title}}" required>
+                <div class="error" ng-show="editplanningsheetForm.$submitted && editplanningsheetForm.title.$invalid">
+                    Title necessary
+                </div>
+            </td>
+            <td>work_hours:</td>
+            <td>
+                <input type="number" name="work_hours"  ng-model="edit.work_hours" class="w180" value="{{p.work_hours}}" 
+                  required>
+                <div class="error" ng-show="editplanningsheetForm.$submitted && 
+                  editplanningsheetForm.work_hours.$error.required">
+                    work_hours necessary
+                </div>
+
+            </td>
+            <td>billable_hours:</td>
+            <td>
+                <input type="number" name="billable_hours" ng-model="edit.billable_hours" class="w180" 
+                  value="{{p.billable_hours}}" required>
+                <div class="error" ng-show="editplanningsheetForm.$submitted && 
+                   editplanningsheetForm.billable_hours.$error.required">
+                    billable_hours necessary
+                </div>
+                <div class="error" ng-show="edit.billable_hours > edit.work_hours">
+                Billing hours cannot be greater than work hours
+            </div>
+
+            </td>
+            <td>
+                <input type="submit" value=" save " >
+            </td>
+
+            <td>
+                <input type="button" value=" cancel" ng-click="cancelEdit()">
+            </td>
+        </tr>
+    </table>
+</form> -->
+
+<!-- 
+ form : {{editplanningsheetForm.$valid}}
+<pre>
+{{ editplanningsheetForm | json }}
+</pre>  -->

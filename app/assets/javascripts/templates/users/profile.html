@@ -1,0 +1,81 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Edit Profile</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form name="editProfile" class="form-horizontal" method="post" novalidate ng-submit="editProfile.$valid && updateProfile()">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="first_name" ng-model="edit_user_detail.first_name"
+                                ng-class="{error:  editProfile.first_name.$invalid && editProfile.$submitted}" name="first_name" required >
+                            </div>
+                            <span class="error" ng-show=" editProfile.first_name.$invalid && editProfile.$submitted ">
+                                  First Name required
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Last Name:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="last_name" ng-model="edit_user_detail.last_name" ng-class="{error:  editProfile.last_name.$invalid && editProfile.$submitted}" name="last_name" required>
+                            </div>
+                            <span class="error" ng-show=" editProfile.last_name.$invalid && editProfile.$submitted ">
+                                  Last Name required
+                            </span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Technologies</label>
+                            <div class="col-lg-4">
+                                <select multiple chosen class="form-control" ng-model="edit_user_detail.technologies" ng-options="technology.id as technology.name for  technology in technology_list"  data-placeholder="Pick one of these" style="width:200px;">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Enter Current Password:</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" placeholder="Enter Current Password" ng-model="edit_user_detail.current_password" ng-class="{error: editProfile.current_password.$invalid && editProfile.$submitted }" name="current_password" ng-minlength=8>
+                            </div>
+                            <span class="error" ng-show=" editProfile.current_password.$invalid && editProfile.$submitted ">
+                                  Password too short(min 8 char)
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Enter New Password:</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" placeholder="Enter New Password" ng-model="edit_user_detail.password" ng-class="{error: editProfile.new_password.$invalid && editProfile.$submitted }" name="new_password" ng-minlength=8>
+                            </div>
+                            <span class="error" ng-show=" editProfile.new_password.$invalid && editProfile.$submitted ">
+                                  New Password too short(min 8 char)
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Confirm New Password:</label>
+                            <div class="col-sm-4">
+                                <input type="password" class="form-control" placeholder="Reenter New Password" ng-model="edit_user_detail.confirm_password" ng-minlength=8 ng-class="{error: edit_user_detail.confirm_password.$invalid}" 
+                                name="confirm_password" >
+                                <!-- <span class="error" ng-show="editProfile.$submitted && editProfile.new_password.$viewValue  ">
+                                    Fields are not equal !
+                                </span> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                 <input type="submit" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </div>
+                        {{ editProfile.confirm_password | json }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

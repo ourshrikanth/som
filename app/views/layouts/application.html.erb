@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="som">
+<head>
+  <title>Som</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+
+<!-- <div class="alert alert-info text-center" ng-show="loading">Loading Data</div>
+ -->
+
+<!-- <div ng-show="!isLoggedIn">
+<body class="gray-bg">
+</div>
+
+<div ng-show="isLoggedIn">
+<body>
+</div> -->
+<body ng-class="isLoggedIn ? '' : 'gray-bg'">
+	<div id="wrapper">
+		<div ng-show="isLoggedIn" ng-include="'nav/left-nav.html'"></div>
+ 		<div id="page-wrapper" ng-class="isLoggedIn ? 'gray-bg' : 'loginPage'" >
+			<div ng-show="isLoggedIn" ng-include="'nav/_header.html'"></div>
+			<ui-view></ui-view>
+			<div class="clearfix visible-md-block"></div>
+		</div>
+		<div ng-include="'nav/footer.html'"></div>
+	</div>     <!-- page wrapper -->
+</body>
+
+
+
+<!-- conditions need to follow
+in login page : add class= "gray-bg" to body . if not, shift to page-wrapper div -->
+
+</html>

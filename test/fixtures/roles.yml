@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: admin
+  status: active 
+
+two:
+  id: 2
+  name: employee
+  status: active
+
+three:
+  id: 3
+  name: project manager
+  status: active

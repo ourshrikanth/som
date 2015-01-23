@@ -1,0 +1,150 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Add User</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content">
+                    <form name="registerForm" class="form-horizontal" method="post" novalidate ng-submit="registerForm.$valid && register()">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" ng-class="{error:  registerForm.firstName.$invalid && registerForm.$submitted}" name="firstName" placeholder="First Name" ng-model="employee.first_name" required>
+                                <span class="error" ng-show=" registerForm.firstName.$invalid && registerForm.$submitted ">
+                                  First Name required
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Last Name:</label>
+                            <div class="col-sm-4">
+                                <input type="text" name="lastName" class="form-control" ng-class="{error: registerForm.lastName.$invalid && registerForm.$submitted }" placeholder="Last Name " ng-model="employee.last_name " required>
+                                <span class="error" ng-show=" registerForm.lastName.$invalid && registerForm.$submitted ">
+                            Last Name required
+                          </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email:</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" ng-class="{error: ( !registerForm.email.$error.required && registerForm.email.$error.unique && registerForm.email.$dirty) || ( registerForm.email.$error.required && registerForm.$submitted) || ( !registerForm.email.$error.unique && registerForm.email.$invalid && registerForm.$submitted ) }" placeholder="Email" name="email" valid-email ng-model-options="{ debounce: 100 } " model="User" is-checked=true ng-model="employee.email " unique-field required>
+
+                                <span class="error" ng-show=" (registerForm.email.$error.required && registerForm.$submitted) || ( !registerForm.email.$error.unique && registerForm.email.$invalid && registerForm.$submitted )">
+                                Valid Email required
+                              </span>
+                                <span class="error " ng-show=" !registerForm.email.$error.required && registerForm.email.$error.unique && registerForm.email.$dirty">
+                                Email already in use
+                              </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Role:</label>
+
+                            <div class="col-sm-4">
+                                <select required ng-model="employee.role_id " class="form-control" id="role_id" name="role" ng-class="{error: registerForm.role.$error.required && registerForm.$submitted}">
+                                    <option value="">Select Role</option>
+                                    <option ng-repeat="role in roles " value="{{role.id}} ">{{role.name}}</option>
+                                </select>
+                                <span class="error" ng-show=" registerForm.role.$error.required && registerForm.$submitted ">
+                                  Role required
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Technologies</label>
+
+                            <div class="col-lg-4">
+                                <select multiple chosen class="form-control" name="technology" ng-model="employee.technologies" ng-options="technology.id as technology.name for  technology in technology_list" data-placeholder="Select Technologies">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-info btn-sm" ng-click="addNewTeam()">Add Teams</button>
+                        </div>
+                        </div>
+
+                        <div ng-repeat="employee in employee.newTeams ">
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Select Team</label>
+                                <div class="col-lg-4">
+                                    <select required ng-model="employee.team_id" name="team" class="form-control">
+                                        <option value="">Select Team</option>
+                                        <option ng-repeat="team in all_teams " value="{{team.id}} ">{{team.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                <label class="col-lg-2 control-label">Approver?</label>
+                                <label class="radio-inline">
+                                    <input type="radio" ng-model="employee.approver " value='1' required/> Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" ng-model="employee.approver " value='0' required/> No
+                                </label>
+                                <button class="btn btn-warning btn-circle" title="Delete" ng-click="removeTeam($index)"><i class="fa fa-times"></i>
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Employee ID:</label>
+                            <div class="col-sm-4">
+                                <input type="text " class="form-control " ng-class="{error: registerForm.employee_id.$error.required && registerForm.$submitted }" ng-register=true name="employee_id" is-checked=true placeholder="Employee Id " ng-model="   employee.employee_id " required unique-field model="User">
+                                <span class="error" ng-show=" registerForm.employee_id.$error.required && registerForm.$submitted ">
+        Employee ID required
+        </span>
+                                <span class="error " ng-show="registerForm.employee_id.$dirty && registerForm.employee_id.$error.unique && !registerForm.employee_id.$error.required  ">
+        Employee ID already in use
+        </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Password:</label>
+                            <div class="col-sm-4">
+                                <input required ng-model="employee.password " ng-class="{error: registerForm.password.$invalid && registerForm.$submitted }" class="form-control " name="password" ng-minlength=8 type="password" id="password " />
+                                <span class="error" ng-show=" registerForm.password.$invalid && registerForm.$submitted ">
+      Password too short(min 8 char)
+    </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Confirm Password:</label>
+                            <div class="col-sm-4">
+                                <input name="confirm_password" ng-minlength=8 ng-class="{error: (registerForm.confirm_password.$error.required && registerForm.$submitted) || (registerForm.confirm_password.$error.required && registerForm.$submitted)}" ng-model="employee.confirm_password " class="form-control " type="password" id="confirm_password " required pwd-validity="{{employee.password}}" />
+                                <span class="error" ng-show="registerForm.confirm_password.$error.pwdValidity && registerForm.$submitted && !registerForm.confirm_password.$error.required  ">
+      Fields are not equal !
+    </span>
+                                <span class="error" ng-show=" registerForm.confirm_password.$error.required && registerForm.$submitted">
+      Confirm Password required
+    </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <!-- <button class="btn btn-white" type="submit">Cancel</button> -->
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="ngdialog-message">
+    <h2>{{status | capitalize}} {{dialog_for}}</h2>
+  <form name="reviewForm" class="form-signin" method="post" novalidate ng-submit="reviewForm.$valid && updateStatus()">
+  <div>Comment : 
+    <textarea class="form-control" name="comment" ng-model="review.comment" rows="3" required ></textarea>
+    </div>
+    <span 
+         ng-show="reviewForm.comment.$error.required && reviewForm.$submitted">Comment is required</span>
+<br/>  
+<div class="ngdialog-buttons mt">
+<input type="submit" class="ngdialog-button ngdialog-button-primary" value={{status}}>
+</div>
+<!-- 
+ form : {{reviewForm.$valid}}
+<pre>
+{{ reviewForm | json }}
+</pre>  -->

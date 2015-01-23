@@ -1,0 +1,125 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Edit User</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-content">
+                    <form name="editUserForm" class="form-horizontal" method="post" novalidate ng-submit="editUserForm.$valid && updateUser(employee.id)">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name:</label>
+                            <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-class="{error: editUserForm.firstName.$invalid && editUserForm.$submitted }" placeholder="First Name" name="firstName" ng-model="employee.first_name" required>
+        <span class="error" ng-show=" editUserForm.firstName.$invalid && editUserForm.$submitted ">
+            First Name required
+        </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Last Name:</label>
+                            <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-class="{error: editUserForm.lastName.$invalid && editUserForm.$submitted }" placeholder="Last Name" name="lastName" ng-model="employee.last_name" required >
+        <span class="error" ng-show=" editUserForm.lastName.$invalid && editUserForm.$submitted ">
+        Last Name required
+      </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email:</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" ng-class="{error: (editUserForm.email.$error.required && editUserForm.$submitted) || ( !editUserForm.email.$error.unique && editUserForm.email.$invalid && editUserForm.$submitted ) ||  (!editUserForm.email.$error.required && editUserForm.email.$error.unique && editUserForm.email.$dirty) || ( !editUserForm.email.$error.required && editUserForm.email.$error.unique && editUserForm.email.$dirty)}"  placeholder="Email" name="email"  valid-email ng-model-options="{ debounce: 100 }" is-checked=false model="User" object-id={{employee.id}} ng-model="employee.email" unique-field required >
+        <span class="error" ng-show="(editUserForm.email.$error.required && editUserForm.$submitted) || ( !editUserForm.email.$error.unique && editUserForm.email.$invalid && editUserForm.$submitted )">
+            Valid Email required
+        </span>
+        <span class="error " ng-show=" !editUserForm.email.$error.required && editUserForm.email.$error.unique && editUserForm.email.$dirty">
+            Email already in use
+        </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Role:</label>
+
+                            <div class="col-sm-4">
+                               <select required ng-model="employee.role_id" class="form-control" id="role_id"name="role" ng-class="{error: editUserForm.role.$error.required && editUserForm.$submitted}">
+            <option value="">select Role</option>
+            <option ng-repeat="role in roles" value="{{role.id}}" selected="{{employee.role_id}}">{{role.name}}</option>
+        </select>
+        <span class="error" ng-show=" editUserForm.role.$error.required && editUserForm.$submitted ">
+            Role required
+        </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Technologies</label>
+
+                            <div class="col-lg-4">
+                               <select multiple chosen class="form-control" ng-model="employee.technologies" ng-options="technology.id as technology.name for  technology in technology_list"  data-placeholder="Pick one of these" style="width:200px;">
+  </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                        <div class="col-sm-3">
+                        <button class="btn btn-info btn-sm" ng-click="addNewTeam()">Add Teams</button>
+                        </div>
+                        </div>
+
+                        <div ng-repeat="employee in employee.newTeams ">
+
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Select Team</label>
+                                <div class="col-lg-4">
+                                    <select required ng-model="employee.team_id" name="team" class="form-control">
+                                        <option value="">Select Team</option>
+                                        <option ng-repeat="team in all_teams " value="{{team.id}} " ng-selected="{{team.id==employee.team_id}}">{{team.name}}</option>
+                                    </select>
+                                </div>
+                                <label class="col-lg-2 control-label">Approver?</label>
+                                <label class="radio-inline ">
+                                    <input type="radio" ng-model="employee.approver " value='1' required/> Yes
+                                </label>
+                                <label class="radio-inline ">
+                                    <input type="radio" ng-model="employee.approver " value='0' required/> No
+                                </label>
+                                <button class="btn btn-warning btn-circle" title="Delete" ng-click="removeTeam($index)"><i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Employee ID:</label>
+                            <div class="col-sm-4">
+                                <input type="text " class="form-control " ng-class="{error: editUserForm.employee_id.$error.required && editUserForm.$submitted }" ng-register=true name="employee_id" is-checked=true placeholder="Employee Id " ng-model="   employee.employee_id " required unique-field model="User">
+                                <span class="error" ng-show=" editUserForm.employee_id.$error.required && editUserForm.$submitted ">
+        Employee ID required
+        </span>
+                                <span class="error " ng-show="editUserForm.employee_id.$dirty && editUserForm.employee_id.$error.unique && !editUserForm.employee_id.$error.required  ">
+        Employee ID already in use
+        </span>
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <!-- <button class="btn btn-white" type="submit">Cancel</button> -->
+                                 <input type="submit" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
